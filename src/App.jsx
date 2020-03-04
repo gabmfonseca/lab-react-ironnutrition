@@ -35,7 +35,7 @@ class App extends Component {
       image: this.state.image,
       quantity: 0
     };
-    // console.log(newMeal);
+    console.log(newMeal);
 
     this.setState(previousState => ({
       meals: [...previousState.meals, newMeal],
@@ -52,9 +52,9 @@ class App extends Component {
     });
   }
 
-  searchMeal(value) {
+  searchMeal(query) {
     this.setState({
-      search: value
+      search: query
     });
   }
 
@@ -70,30 +70,31 @@ class App extends Component {
               type="text"
               placeholder="Name"
               name="name"
-              // value={this.state.name}
+              value={this.state.name}
               onChange={this.handleInputChange}
             ></input>
             <input
               type="text"
               placeholder="Number of calories"
               name="calories"
-              // value={this.state.email}
+              value={this.state.calories}
               onChange={this.handleInputChange}
             ></input>
             <input
               type="text"
               placeholder="Image URL"
               name="image"
-              // value={this.state.email}
+              value={this.state.image}
               onChange={this.handleInputChange}
             ></input>
-            {/* <input type="file" name="image" onChange={this.handleInputChange}></input> */}
             <button>Submit</button>
           </form>
         )}
-        {this.state.meals.map(meal => (
-          <MealBox key={meal.name} {...meal} />
-        ))}
+        {this.state.meals.map(meal => {
+          if (meal.name.toLowerCase().includes(this.state.search.toLowerCase())) {
+            return <MealBox key={meal.name} {...meal} />;
+          }
+        })}
       </div>
     );
   }

@@ -11,13 +11,13 @@ class Search extends Component {
   }
 
   handleInputChange(event) {
-    const value = event.target.value;
+    const query = event.target.value;
 
     this.setState({
-      search: value
+      search: query
     });
 
-    this.props.search(value);
+    this.props.search(query);
   }
 
   render() {
@@ -26,7 +26,7 @@ class Search extends Component {
         <input
           type="search"
           placeholder="Search for a meal"
-          name="search"
+          name="query"
           value={this.state.search}
           onChange={this.handleInputChange}
         ></input>
